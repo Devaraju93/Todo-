@@ -50,7 +50,7 @@ function App() {
     localStorage.setItem("todolist", JSON.stringify(reducedTodo));
     setTodos(reducedTodo);
 
-    toast.success(`Todo "${todoToDelete.title}" deleted successfully!`);
+    // toast.success(`DEvraj "${todoToDelete.title}" deleted successfully!`);
   };
 
   const handleComplete = (index) => {
@@ -89,7 +89,7 @@ function App() {
     localStorage.setItem("completedTodos", JSON.stringify(reducedTodo));
     setcompletedTodos(reducedTodo);
 
-    toast.success(`Completed todo "${todoToDelete.title}" deleted successfully!`);
+    toast.success(`"${todoToDelete.title}" deleted successfully!`);
   };
 
   useEffect(() => {
@@ -122,13 +122,19 @@ function App() {
     newToDo[currentEdit] = currentEditedItem;
     setTodos(newToDo);
     setCurrentEdit("");
-
-    toast.success(`Todo "${oldTodo.title}" updated to "${currentEditedItem.title}"!`);
+    
+    if (oldTodo.title !== currentEditedItem.title) {
+      toast.success(`Title "${oldTodo.title}" updated to "${currentEditedItem.title}"!`);
+    }
+    
+    if (oldTodo.description !== currentEditedItem.description) {
+      toast.success(`Description "${oldTodo.description}" updated to "${currentEditedItem.description}"!`);
+    }
   };
 
   return (
     <div className="App">
-      <h1 className="">Todo</h1>
+      <h1 className="title">Todo</h1>
       <div className="todo-wrapper">
         <div className="todo-input">
           <div className="todo-input-item">
@@ -225,7 +231,7 @@ function App() {
                         title="complete?"
                       />
                       <AiOutlineEdit
-                        className="check-icon"
+                        className="edit-icon"
                         onClick={() => handleEdit(index, item)}
                         title="Edit?"
                       />
